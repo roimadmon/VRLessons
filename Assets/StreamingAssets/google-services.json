@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1030190541618",
+    "project_id": "promixeddemo",
+    "storage_bucket": "promixeddemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030190541618:android:ee414dbf0dbf2e1199852b",
+        "android_client_info": {
+          "package_name": "com.Promixed.QuestionsDemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030190541618-1u8874sh16crigt2dcsp32qc8r2o471l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQzYdgiKancQvhXI2I3SMYmLdtReya1SU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030190541618-1u8874sh16crigt2dcsp32qc8r2o471l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1030190541618-u7jo3en1bglaftc1gh9esa65jai6mcb6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Promixed.QuestionsDemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
