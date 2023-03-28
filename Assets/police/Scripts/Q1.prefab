@@ -694,7 +694,6 @@ MonoBehaviour:
   targets: []
   shuffleAnswers: 0
   timer: 0
-  numberQuestion: 0
   currectAnswers: 0
 --- !u!1 &5638573518821905992
 GameObject:

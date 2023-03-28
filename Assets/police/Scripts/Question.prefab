@@ -317,5 +317,4 @@ MonoBehaviour:
   targets: []
   shuffleAnswers: 0
   timer: 0
-  numberQuestion: 0
   currectAnswers: 0

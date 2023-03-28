@@ -129,7 +129,7 @@ namespace Photon.Pun.Demo.PunBasics
 			if (feedbackText == null) {
 				return;
 			}
-
+			Debug.Log(message);
 			// add new messages as a new line and at the bottom of the log.
 			feedbackText.text += System.Environment.NewLine+message;
 		}
