@@ -10,7 +10,6 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-
 using Photon.Realtime;
 
 namespace Photon.Pun.Demo.PunBasics
@@ -32,7 +31,7 @@ namespace Photon.Pun.Demo.PunBasics
 		[Tooltip("The Ui Text to inform the user about the connection progress")]
 		[SerializeField]
 		private Text feedbackText;
-
+			
 		[Tooltip("The maximum number of players per room")]
 		[SerializeField]
 		private byte maxPlayersPerRoom = 4;
@@ -40,6 +39,10 @@ namespace Photon.Pun.Demo.PunBasics
 		[Tooltip("The UI Loader Anime")]
 		[SerializeField]
 		private LoaderAnime loaderAnime;
+		
+		[Tooltip("Load level")]
+		[SerializeField]
+		private string LoadLevel="";
 
 		#endregion
 
@@ -215,8 +218,14 @@ namespace Photon.Pun.Demo.PunBasics
 
 				// #Critical
 				// Load the Room Level. 
-				PhotonNetwork.LoadLevel("PunBasics-Room for 1");
-
+				if(LoadLevel == "")
+					PhotonNetwork.LoadLevel("PunBasics-Room for 1");
+				else
+					PhotonNetwork.LoadLevel(LoadLevel);
+			}
+			else
+			{
+				PhotonNetwork.LoadLevel(LoadLevel);
 			}
 		}
 
