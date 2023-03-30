@@ -9853,7 +9853,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: '<Color=Green>INFORMATION:</Color>
+
+    This demo can run with the PunCockpit
+    Scene.
+
+    For this, the Scene ''PunCockpit-Scene'' needs to be enabled to the
+    build settings.
+
+    Else, you''ll get only a minimal Menu to connect'
 --- !u!222 &1229299685
 CanvasRenderer:
   m_ObjectHideFlags: 0
