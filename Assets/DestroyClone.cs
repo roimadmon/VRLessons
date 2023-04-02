@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class DestroyClone : MonoBehaviour
 {
+    [SerializeField] private float timeRemove = 3f;
     private void OnEnable()
     {
-        Invoke("DestroyObject",3f);
+        Invoke("DestroyObject",timeRemove);
+        
     }
 
 
