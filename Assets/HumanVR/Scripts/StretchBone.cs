@@ -5,9 +5,11 @@ using UnityEngine;
 public class StretchBone : MonoBehaviour
 {
     [SerializeField] private Transform partBodyStart;
-    [SerializeField] private Transform target;
-   
     [SerializeField] private Transform partBodyStresh;
+   
+    [Space]
+    [SerializeField] private Transform target;
+    [Space]
     [SerializeField ,Range(0,0.3f)] private float _maxStretch = 0.2f;
     private float stretch = 0;
    
