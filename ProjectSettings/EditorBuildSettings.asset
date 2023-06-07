@@ -5,12 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/police/GunStore 1.unity
+  - enabled: 0
+    path: Assets/Old Project/police/GunStore 1.unity
     guid: ba602920f5b08644da0817226e4c4a5d
-  - enabled: 1
-    path: Assets/police/GamePlay.unity
+  - enabled: 0
+    path: Assets/Old Project/police/GamePlay.unity
     guid: f1e0e8609b423704a9c0b7d32b9474e5
+  - enabled: 1
+    path: Assets/Current Scene/Scenes/LobbyDesert.unity
+    guid: 31614d8b85e31b845964b1f545e7f9db
+  - enabled: 1
+    path: Assets/Current Scene/Scenes/SampleSceneDesert.unity
+    guid: 25ae0cdba603624499f0dc4264d64ea9
+  - enabled: 0
+    path: Assets/Old Project/police/GamePlay ui new.unity
+    guid: 8ded8809703607f4c98908ca69651b3e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 391bb3c90faf4db498ee346d081c9678,
       type: 2}
