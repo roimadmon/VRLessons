@@ -4478,7 +4478,7 @@ MonoBehaviour:
   feedbackText: {fileID: 1949846760}
   maxPlayersPerRoom: 2
   loaderAnime: {fileID: 1045084274}
-  LoadLevel: GamePlay
+  LoadLevel: GamePlay ui new
 --- !u!1001 &414475286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20176,7 +20176,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047699876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c021b275fc365a4daa99c866ff511ce, type: 3}
   m_Name: 
@@ -20185,8 +20185,7 @@ MonoBehaviour:
   - {fileID: 1602706815}
   _TurnOff:
   - {fileID: 1369770446}
-  _TurnOn:
-  - {fileID: 0}
+  _TurnOn: []
   hide: 1
   size: 0.01
 --- !u!1001 &2051527017

@@ -40,6 +40,8 @@ namespace Photon.Pun.Demo.PunBasics
         [Tooltip("The prefab to use for representing the player")]
         [SerializeField]
         private GameObject playerPrefab;
+        [SerializeField]
+        private string lobyNameScene;
 
         #endregion
 
@@ -55,17 +57,17 @@ namespace Photon.Pun.Demo.PunBasics
 			// in case we started this demo with the wrong scene being active, simply load the menu scene
 			if (!PhotonNetwork.IsConnected)
 			{
-				SceneManager.LoadScene("GunStore 1");
-
+				SceneManager.LoadScene(lobyNameScene);
+				Debug.Log("in1");
 				return;
 			}
 
 			if (playerPrefab == null) { // #Tip Never assume public properties of Components are filled up properly, always check and inform the developer of it.
-
+			
 				Debug.LogError("<Color=Red><b>Missing</b></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
 			} else {
-
-
+				Debug.Log("in2");
+				Debug.Log(PlayerManager.LocalPlayerInstance);
 				if (PlayerManager.LocalPlayerInstance==null)
 				{
 				    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
