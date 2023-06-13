@@ -42412,6 +42412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 9090680929302504997, guid: 686bd84bce3163b4c8045ecdd8c00284,
     type: 3}
+  lobyNameScene: 
 --- !u!114 &2047699882
 MonoBehaviour:
   m_ObjectHideFlags: 0

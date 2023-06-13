@@ -32,6 +32,8 @@ namespace Autohand.Demo{
                 if(hitBody != null) {
                     Debug.DrawRay(barrelTip.position, (hit.point - barrelTip.position), Color.green, 5);
                     hitBody.GetComponent<Smash>()?.DoSmash();
+                    
+                    hitBody.GetComponent<HitTarget>()?.Hit(hit.point);
                     hitBody.AddForceAtPosition((hit.point - barrelTip.position).normalized*hitPower*10, hit.point, ForceMode.Impulse);
                 }
             }

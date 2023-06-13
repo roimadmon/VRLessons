@@ -5,7 +5,7 @@ using Autohand;
 
 namespace Autohand.Demo{
     public class TextChanger : MonoBehaviour{
-        public TMPro.TextMeshPro text;
+        public TMPro.TextMeshPro textMeshPro;
         Coroutine changing;
         Coroutine hide;
         
@@ -13,10 +13,22 @@ namespace Autohand.Demo{
 
         }
 
-        public void UpdateText(string newText) {
-
+        public void UpdateText(string newText)
+        {
+            Debug.Log(newText);
+            textMeshPro.text = newText;
         }
 
+        public void UpdateTextString(string newText)
+        {
+            Debug.Log(newText);
+            textMeshPro.text = newText+"";
+        }
+        public void UpdateTextint(float newText)
+        {
+            // Debug.Log(newText);
+            textMeshPro.text = (int)newText+"";
+        }
         IEnumerator ChangeText(float seconds, string newText) {
             //float totalTime = 1f;
             //var timePassed = 0f;
@@ -44,11 +56,11 @@ namespace Autohand.Demo{
             //}
 
             yield return new WaitForFixedUpdate();
-            text.text = "";
+            textMeshPro.text = "";
         }
 
         private void OnDestroy() {
-            text.text = "";
+            textMeshPro.text = "";
         }
     }
 }

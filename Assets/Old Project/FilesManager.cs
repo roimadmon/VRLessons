@@ -40,8 +40,8 @@ public class FilesManager : MonoBehaviour
     {
         index = 0;
         // Debug.Log( Application.persistentDataPath + "/questions.csv");
-        // pathCSVFile = Application.persistentDataPath + "/questions.csv";
-        pathCSVFile = Application.dataPath + "/police/Questions/questions.csv";
+        pathCSVFile = Application.persistentDataPath + "/questions.csv";
+        // pathCSVFile = Application.dataPath + "/police/Questions/questions.csv";
         if (File.Exists(pathCSVFile))
         {
 
