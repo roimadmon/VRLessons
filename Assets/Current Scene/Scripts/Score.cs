@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Autohand.Demo;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
+    public static Score Instance;
+    
     [SerializeField] private TextChanger _scoreTxt;
     [SerializeField] private TextChanger _answerTxt;
     [SerializeField] private TextChanger _scorePlayerTxt;
@@ -12,8 +15,18 @@ public class Score : MonoBehaviour
     [SerializeField] private int _wrong = -1;
     private int _score;
     private int _answer;
+
+    private void Awake()
+    {
+        if (Instance != null)
+            Destroy(gameObject);
+        
+        Instance = this;
+        
+    }
+
     
-    
+
     // Start is called before the first frame update
     void Start()
     {

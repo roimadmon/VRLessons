@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Answer : MonoBehaviour
@@ -9,7 +8,7 @@ public class Answer : MonoBehaviour
     
     public bool answer { get=>CurrectAnswer;  set {CurrectAnswer = value; } }
     // Start is called before the first frame update
-
+    
 
 
     public void OnDestroy()
@@ -28,3 +27,4 @@ public class Answer : MonoBehaviour
     }
    
 }
+

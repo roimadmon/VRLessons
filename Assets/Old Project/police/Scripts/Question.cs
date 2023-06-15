@@ -13,7 +13,7 @@ public class Question : MonoBehaviour
     
     [SerializeField] private TextMeshPro questionText;
     [SerializeField] private Transform targetParent;
-    [SerializeField] private GameObject targetPrefab;
+    [SerializeField] private List<GameObject> targetPrefab;
     [SerializeField] private List<GameObject> targets;
     private int currectAnswersNumber;
     [SerializeField] private bool shuffleAnswers;
@@ -28,8 +28,21 @@ public class Question : MonoBehaviour
     {
         targets = new List<GameObject>();
     }
-    
-    
+
+    public void AnswerStatus(bool ans)
+    {
+        if(ans)
+            FilesManager.instance.RemoveQuestion();
+        else
+            FilesManager.instance.GetNextQuestion();
+        
+        Destroy(gameObject);
+            // if (ans)
+        //     Destroy(gameObject);
+        // else
+        //     transform.SetSiblingIndex(transform.parent.childCount - 1);
+        // ans? transform.SetSiblingIndex(transform.parent.childCount - 1) : Destroy(gameObject);
+    }
     private void OnEnable()
     {
         ans += disableTarget;
@@ -49,30 +62,47 @@ public class Question : MonoBehaviour
         timer = newQuestion.time;
         currectAnswers = newQuestion.currectAnswersNumber;
         currectAnswersNumber = newQuestion.currectAnswersNumber;
-        int index = 0;
+        // int index = 0;
+        List<int> index = new List<int>();
+        for (int i = 0; i < newQuestion._answers.Count; i++)
+        {
+            index.Add(i);
+        }
+        
+        if (shuffleAnswers)
+        {
+            index = GetRandumElements(index);
+        }
+
+        int j = 0;
         foreach (var answer in newQuestion._answers)
         {
-            GameObject targetPref = Instantiate(targetPrefab, targetParent);
-            targetPref.name = targetPref.name + " " + index++;
-            targetPref.GetComponent<Answer>().answer = currectAnswersNumber > 0;
+            Debug.Log(index[j]);
+            GameObject targetPref = Instantiate(targetPrefab[index[j++]], targetParent);
+            targetPref.name = "not currect";
+            
+            targetPref.GetComponentInChildren<Answer>().answer = currectAnswersNumber > 0;
             currectAnswersNumber--;
             TextMeshPro answerText = targetPref.GetComponentInChildren<TextMeshPro>();
             answerText.text = answer;
             targets.Add(targetPref);
         }
-        
+
+        targets[0].name = "currect";
         if (shuffleAnswers)
         {
 
-            targets = GetRandumElements(targets);
-            for (int i = 0; i < targets.Count; i++)
-            {
-                targets[i].transform.SetSiblingIndex(i);
-            }
+            // targets = GetRandumElements(targets);
+            // for (int i = 0; i < targets.Count; i++)
+            // {
+            //     targets[i].transform.SetSiblingIndex(i);
+            // }
         }
 
     }
-  
+
+
+   
 
 
     List<T> GetRandumElements<T>(List<T> inputList)

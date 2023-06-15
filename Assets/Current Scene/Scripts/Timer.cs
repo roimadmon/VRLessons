@@ -10,6 +10,7 @@ using UnityEngine.Events;
         public class TimeFloatEvent : UnityEvent<float> { }
 
         [SerializeField] private bool autoStart;
+        [SerializeField] private bool syncTimer;
         float timeLeft = 0;
         public float TimeLeft => timeLeft;
         string lastTimeString;
@@ -36,6 +37,10 @@ using UnityEngine.Events;
 
         private void OnEnable()
         {
+            if (syncTimer)
+            {
+                timeLeft = transform.GetComponentInParent<Timer>().timeLeft;
+            }
             if (autoStart) StartOrContinueTimer();
             UpdateTimeString();
             if (running && timeLeft > 0) onContinue.Invoke();

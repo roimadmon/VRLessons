@@ -48,7 +48,7 @@ public class ManagerQuestions : MonoBehaviour
     {
         // instance._numberQuestion = numberQuestion;
         // instance._numberAnswersCurrect = currectAnswers;
-        StartCoroutine(UpdateList());
+        // StartCoroutine(UpdateList());
     }
 
 

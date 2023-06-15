@@ -60,7 +60,7 @@ namespace Autohand.Demo{
         }
 
         private void OnDestroy() {
-            textMeshPro.text = "";
+            // textMeshPro.text = "";
         }
     }
 }

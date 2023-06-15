@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 
 public class FilesManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class FilesManager : MonoBehaviour
     [SerializeField] private Transform parentQuestions;
     [SerializeField] private GameObject prefabQuestion;
     [SerializeField] private List<questionScript> questions;
-
+    
     private int index;
     // Start is called before the first frame update
     private void Awake()
@@ -27,6 +28,7 @@ public class FilesManager : MonoBehaviour
             Destroy(gameObject);
         
         instance = this;
+        Invoke("LoadGame",2);
         
     }
 
@@ -35,6 +37,7 @@ public class FilesManager : MonoBehaviour
         // LoadGame();
         Debug.Log( Application.persistentDataPath + "/questions.csv");
         Debug.Log( Application.dataPath + "/police/Questions/questions.csv");
+        index = 0;
     }
     public void LoadGame()
     {
@@ -51,7 +54,7 @@ public class FilesManager : MonoBehaviour
             allData[0] = "";
             
             //
-            int index = 0;
+           
             foreach (string data in allData)
             {
                 if (data.Length>0)
@@ -72,7 +75,7 @@ public class FilesManager : MonoBehaviour
                     
                     questions.Add(question);
 
-                    StartCoroutine(CreateQuestion(question));
+                   
                 }
             }
 
@@ -82,13 +85,33 @@ public class FilesManager : MonoBehaviour
         else
         {
             Debug.Log("not found file");
-            notFoundFileLocation.gameObject.SetActive(true);
+            notFoundFileLocation.transform.parent.gameObject.SetActive(true);
             notFoundFileLocation.text = "move file to directory \n" + Application.persistentDataPath + "/questions.csv";
         }
+        index = 0;
+        GetNextQuestion();
     }
 
     // Update is called once per frame
-    
+    public void GetNextQuestion()
+    {
+        if(questions.Count == 0)
+            return;
+
+        if (index == questions.Count)
+        {
+            index = 0;
+            questions = GetRandumElements(questions);
+        }
+        StartCoroutine(CreateQuestion(questions[index]));
+    }
+
+    public void RemoveQuestion()
+    {
+        questions.RemoveAt(index-1);
+        index--;
+        GetNextQuestion();
+    }
 
     IEnumerator CreateQuestion(questionScript question)
     {   
@@ -96,7 +119,7 @@ public class FilesManager : MonoBehaviour
         q.name = q.name + " "+index++;
         yield return new WaitUntil(() => q.activeSelf);
         q.GetComponent<Question>().init(question);
-        q.SetActive(false);
+        // q.SetActive(false);
 
     }
 
@@ -105,4 +128,20 @@ public class FilesManager : MonoBehaviour
         questions.Clear();
         LoadGame();
     }
+    
+    List<T> GetRandumElements<T>(List<T> inputList)
+    {
+        var count = inputList.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i) {
+            var r = Random.Range(i, count);
+            var tmp = inputList[i];
+            inputList[i] = inputList[r];
+            inputList[r] = tmp;
+        }
+
+        return inputList;
+    }
+
+    
 }
