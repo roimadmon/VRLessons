@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6222847567417307387
+--- !u!1001 &2196285473496496354
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -16,11 +16,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.0040722294
-      objectReference: {fileID: 0}
-    - target: {fileID: 4841961010123604081, guid: 75939b18546acf54b9388e9808dafcbc,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.004072229
       objectReference: {fileID: 0}
     - target: {fileID: 4841961010123604081, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}
@@ -56,26 +51,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -50.348
-      objectReference: {fileID: 0}
-    - target: {fileID: 4841961011050527896, guid: 75939b18546acf54b9388e9808dafcbc,
-        type: 3}
-      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4841961011050527896, guid: 75939b18546acf54b9388e9808dafcbc,
-        type: 3}
-      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4841961011050527896, guid: 75939b18546acf54b9388e9808dafcbc,
-        type: 3}
-      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4841961011050527896, guid: 75939b18546acf54b9388e9808dafcbc,
-        type: 3}
-      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_Target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4841961012117428939, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}
@@ -115,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 8145293000507707513, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}
       propertyPath: m_Name
-      value: D
+      value: D1
       objectReference: {fileID: 0}
     - target: {fileID: 8145293000507707518, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}

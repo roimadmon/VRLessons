@@ -27,7 +27,13 @@ namespace Autohand.Demo{
         public void UpdateTextint(float newText)
         {
             // Debug.Log(newText);
-            textMeshPro.text = (int)newText+"";
+            textMeshPro.text = ((int)newText+1)+"";
+        }
+        
+        public void UpdateTextScore(float newText)
+        {
+            // Debug.Log(newText);
+            textMeshPro.text = ((int)newText)+"";
         }
         IEnumerator ChangeText(float seconds, string newText) {
             //float totalTime = 1f;

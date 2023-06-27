@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,33 +7,28 @@ public class HitTarget : MonoBehaviour
 {
     [SerializeField] private Answer _answer;
     [SerializeField] private GameObject holeGameObject;
-    [SerializeField] private int countHit = 2;
+    [SerializeField] private int countHit = 20;
     public UnityEvent OnHit;
-    public UnityEvent OnEnd;
-
+    public UnityEvent OnHitEnd;
+    [SerializeField] private bool debugHit;
     public void Hit(Vector3 hitPoint)
     {
-        if (countHit > 0)
-        {
-            if(holeGameObject)
+        countHit--;
+        if(holeGameObject)
                 Instantiate(holeGameObject, hitPoint, quaternion.identity, transform);
-            if (_answer.answer)
-            {
-                Score.Instance.AddScore();
-            }
-            else
-            {
-                Score.Instance.RemoveScore();
-                Miss.Instance.MissBall();
-            }
             OnHit?.Invoke();
-            countHit--;
-            if(countHit == 0)
-                OnEnd?.Invoke();
-        }
-        else
+           
+        if(countHit<=0)
+            OnHitEnd?.Invoke();
+        
+    }
+
+    private void Update()
+    {
+        if (debugHit)
         {
-            OnEnd?.Invoke();
+            Hit(new Vector3(-0.266f, 0.9914f, 0.0102f));
+            debugHit = false;
         }
     }
 }

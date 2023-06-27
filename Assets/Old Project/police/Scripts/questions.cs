@@ -15,8 +15,10 @@ using UnityEngine;
 public class questionScript
 {
     public float time;
+    public float timeAns;
     public bool shuffel;
     public string _question;
+    public string _answersExplane;
     public List<string> _answers;
     public int currectAnswersNumber;
     public int numberQuestion;

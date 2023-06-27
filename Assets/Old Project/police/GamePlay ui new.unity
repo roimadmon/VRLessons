@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589245, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.18101177, g: 0.2265774, b: 0.30727556, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 80833786}
+  textMeshPro: {fileID: 0}
 --- !u!224 &80833790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3202,7 +3202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &150136387
 Transform:
   m_ObjectHideFlags: 0
@@ -4096,7 +4096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 201651120}
+  textMeshPro: {fileID: 0}
 --- !u!224 &201651124
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8173,7 +8173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 355752579}
+  textMeshPro: {fileID: 0}
 --- !u!224 &355752583
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 426240745}
+  textMeshPro: {fileID: 0}
 --- !u!224 &426240749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11791,7 +11791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 553314704}
+  textMeshPro: {fileID: 0}
 --- !u!114 &553314704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14136,7 +14136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 666554347}
+  textMeshPro: {fileID: 0}
 --- !u!224 &666554351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20128,7 +20128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 942350125}
+  textMeshPro: {fileID: 0}
 --- !u!224 &942350129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22190,7 +22190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1041491033}
+  textMeshPro: {fileID: 0}
 --- !u!114 &1041491033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23132,7 +23132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1094195716}
+  textMeshPro: {fileID: 0}
 --- !u!224 &1094195720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23754,7 +23754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1122913450}
+  textMeshPro: {fileID: 0}
 --- !u!224 &1122913454
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26536,7 +26536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1237009178}
+  textMeshPro: {fileID: 0}
 --- !u!224 &1237009182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27059,7 +27059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1247376527}
+  textMeshPro: {fileID: 0}
 --- !u!224 &1247376531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32146,7 +32146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0de1c68fdad6a4c8ba6a07c4c708e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1486168969}
+  textMeshPro: {fileID: 0}
 --- !u!224 &1486168973
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42378,7 +42378,11 @@ MonoBehaviour:
   parentQuestions: {fileID: 0}
   prefabQuestion: {fileID: 9120105773950302709, guid: 7bea5b159d6264545a9e6179c1b5441c,
     type: 3}
+  maxNumberQuestions: 20
   questions: []
+  endGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2047699879
 Transform:
   m_ObjectHideFlags: 0

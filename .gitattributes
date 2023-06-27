@@ -1,2 +1,3 @@
 *.png filter=lfs diff=lfs merge=lfs -text
 *.tga filter=lfs diff=lfs merge=lfs -text
+Assets/Current[[:space:]]Scene/Scenes/SampleSceneDesert/LightingData.asset filter=lfs diff=lfs merge=lfs -text

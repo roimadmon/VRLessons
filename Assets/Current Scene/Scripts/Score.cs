@@ -30,26 +30,38 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _score = 0;
-        _answer = 0;
+        RestartGame();
     }
 
+    public void RestartGame()
+    {
+        _score = 0;
+        _answer = 0;
+        updateUi();
+    }
+    
     public void AddScore()
     {
         _score += _scorePoint;
         _answer++;
-        _scoreTxt.UpdateTextint(_score);
-        _scorePlayerTxt.UpdateTextint(_score);
-        _answerTxt.UpdateTextint(_answer);
+        updateUi();
     }
+
     public void RemoveScore()
     {
         _score += _wrong;
         if (_score < 0)
             _score = 0;
-        _scoreTxt.UpdateTextint(_score);
-        _scorePlayerTxt.UpdateTextint(_score);
+
+        updateUi();
     }
 
-    
+    void updateUi()
+    {
+        _scoreTxt.UpdateTextScore(_score);
+        _scorePlayerTxt.UpdateTextScore(_score);
+        _answerTxt.UpdateTextScore(_answer);
+    }
+
+
 }

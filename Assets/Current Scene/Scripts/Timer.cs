@@ -11,8 +11,8 @@ using UnityEngine.Events;
 
         [SerializeField] private bool autoStart;
         [SerializeField] private bool syncTimer;
-        float timeLeft = 0;
-        public float TimeLeft => timeLeft;
+        // float timeLeft = 0;
+        public float timeLeft;// => timeLeft;
         string lastTimeString;
         string timeLeftString;
         public string TimeLeftString => timeLeftString;

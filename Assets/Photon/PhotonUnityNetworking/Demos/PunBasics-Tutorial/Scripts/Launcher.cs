@@ -11,6 +11,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 namespace Photon.Pun.Demo.PunBasics
 {
@@ -126,6 +127,12 @@ namespace Photon.Pun.Demo.PunBasics
 		/// Logs the feedback in the UI view for the player, as opposed to inside the Unity Editor for the developer.
 		/// </summary>
 		/// <param name="message">Message.</param>
+		///
+		///
+		public void LoadSceneByName(string name)
+		{
+			SceneManager.LoadScene(name);
+		}
 		void LogFeedback(string message)
 		{
 			// we do not assume there is a feedbackText defined.

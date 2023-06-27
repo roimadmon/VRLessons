@@ -40,7 +40,7 @@ public class ManagerQuestions : MonoBehaviour
 
     void test(bool b)
     {
-       
+       Debug.Log("test");
     }
 
     

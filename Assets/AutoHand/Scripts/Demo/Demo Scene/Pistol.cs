@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Autohand.Demo{
     public class Pistol : MonoBehaviour
     {
         public Rigidbody body;
-
+        public Transform parent;    
         public Transform barrelTip;
         public float hitPower = 1;
         public float recoilPower = 1;
@@ -19,6 +21,7 @@ namespace Autohand.Demo{
         private void Start() {
             if(body == null && GetComponent<Rigidbody>() != null)
                 body = GetComponent<Rigidbody>();
+            parent = transform.parent;
         }
 
         public void Shoot() {
@@ -41,6 +44,17 @@ namespace Autohand.Demo{
                 Debug.DrawRay(barrelTip.position, barrelTip.forward*range, Color.red, 1);
 
             body.AddForce(barrelTip.transform.up*recoilPower*5, ForceMode.Impulse);
+        }
+
+
+        public void ReturnBack()
+        {
+            // transform.parent = parent;
+            // transform.localPosition = Vector3.zero;
+            // GetComponent<Rigidbody>().isKinematic =true;
+            // transform.localRotation = Quaternion.identity;
+            
+
         }
     }
 }

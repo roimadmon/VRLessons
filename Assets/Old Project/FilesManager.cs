@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 
@@ -18,7 +19,10 @@ public class FilesManager : MonoBehaviour
     private string pathCSVFile;
     [SerializeField] private Transform parentQuestions;
     [SerializeField] private GameObject prefabQuestion;
+    [SerializeField] private int maxNumberQuestions = 20;
     [SerializeField] private List<questionScript> questions;
+
+    [SerializeField] private UnityEvent endGame;
     
     private int index;
     // Start is called before the first frame update
@@ -28,22 +32,21 @@ public class FilesManager : MonoBehaviour
             Destroy(gameObject);
         
         instance = this;
-        Invoke("LoadGame",2);
-        
+
     }
 
     void Start()
     {
         // LoadGame();
-        Debug.Log( Application.persistentDataPath + "/questions.csv");
-        Debug.Log( Application.dataPath + "/police/Questions/questions.csv");
+        Debug.Log( Application.persistentDataPath + "/questions.tsv");
+        Debug.Log( Application.dataPath + "/police/Questions/questions.tsv");
         index = 0;
     }
     public void LoadGame()
     {
         index = 0;
         // Debug.Log( Application.persistentDataPath + "/questions.csv");
-        pathCSVFile = Application.persistentDataPath + "/questions.csv";
+        pathCSVFile = Application.persistentDataPath + "/questions.tsv";
         // pathCSVFile = Application.dataPath + "/police/Questions/questions.csv";
         if (File.Exists(pathCSVFile))
         {
@@ -61,13 +64,17 @@ public class FilesManager : MonoBehaviour
                 {
 
                     questionScript question = new questionScript();
-                    string[] splitData = data.Split(',');
+                    string[] splitData = data.Split('\t');//tab
+                    // string[] splitData = data.Split(',');//comma
                     question.numberQuestion = index++;
                     question._question = splitData[0];
                     question.time = float.Parse(splitData[1]);
-                    question.currectAnswersNumber = int.Parse(splitData[2]);
-                    question.shuffel = bool.Parse(splitData[3]);
-                    for (int i = 4; i < splitData.Length; i++)
+                    question.timeAns = float.Parse(splitData[2]);
+                    question.currectAnswersNumber = int.Parse(splitData[3]);
+                    question.shuffel = bool.Parse(splitData[4]);
+                    question._answersExplane = splitData[5];
+                    
+                    for (int i = 6; i < splitData.Length; i++)
                     {
                         if(splitData[i].Length > 0)
                             question._answers.Add(splitData[i]);
@@ -86,9 +93,15 @@ public class FilesManager : MonoBehaviour
         {
             Debug.Log("not found file");
             notFoundFileLocation.transform.parent.gameObject.SetActive(true);
-            notFoundFileLocation.text = "move file to directory \n" + Application.persistentDataPath + "/questions.csv";
+            notFoundFileLocation.text = "move file to directory \n" + Application.persistentDataPath + "/questions.tsv";
+            return;
         }
         index = 0;
+
+        questions = GetRandumElements(questions);
+        if(maxNumberQuestions < questions.Count)
+            questions.RemoveRange(maxNumberQuestions,questions.Count-maxNumberQuestions);
+        
         GetNextQuestion();
     }
 
@@ -110,6 +123,12 @@ public class FilesManager : MonoBehaviour
     {
         questions.RemoveAt(index-1);
         index--;
+        if (questions.Count == 0)
+        {
+            endGame?.Invoke();
+            return;
+        }
+        questions = GetRandumElements(questions);
         GetNextQuestion();
     }
 
@@ -128,7 +147,11 @@ public class FilesManager : MonoBehaviour
         questions.Clear();
         LoadGame();
     }
-    
+
+    public void LoadSceneByName(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
     List<T> GetRandumElements<T>(List<T> inputList)
     {
         var count = inputList.Count;
