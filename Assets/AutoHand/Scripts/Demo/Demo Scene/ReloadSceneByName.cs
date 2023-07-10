@@ -11,4 +11,8 @@ public class ReloadSceneByName : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    public void ReloadScene(string newSceneName)
+    {
+        SceneManager.LoadScene(newSceneName);
+    }
 }

@@ -23,8 +23,6 @@ public class Question : MonoBehaviour
     [SerializeField] private bool shuffleAnswers;
     [SerializeField] private float timer;
     [SerializeField] private int currectAnswers;
-    [SerializeField] private Color currectAnswerColor;
-    [SerializeField] private Color wrongAnswerColor;
     [SerializeField] private Rigidbody[] targetsRig;
     [SerializeField] private UnityEvent currectAnswersHit;
     [SerializeField] private UnityEvent wrongAnswersHit;
@@ -49,7 +47,7 @@ public class Question : MonoBehaviour
             Score.Instance.AddScore();
             currectAnswersHit?.Invoke();
             numberHitsEnable = 0;
-            target.GetComponent<MeshRenderer>().materials[1].color = currectAnswerColor;
+           
             DisableColliders();
             
         }
@@ -60,9 +58,7 @@ public class Question : MonoBehaviour
                 wrongAnswersHitEnd?.Invoke();
                 return;
             }
-            target.GetComponent<MeshRenderer>().materials[1].color = wrongAnswerColor;  
             numberHitsEnable--;
-            Miss.Instance.MissBall();
             Score.Instance.RemoveScore();
             if (numberHitsEnable > 0)
             {
@@ -90,7 +86,7 @@ public class Question : MonoBehaviour
         
         foreach (var tRigidbody in targetsRig)
         {
-            tRigidbody.GetComponent<MeshCollider>().enabled = false;
+            tRigidbody.gameObject.SetActive(false);
         }
         
     }

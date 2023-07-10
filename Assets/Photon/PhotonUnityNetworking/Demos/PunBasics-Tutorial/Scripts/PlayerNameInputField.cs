@@ -36,14 +36,14 @@ namespace Photon.Pun.Demo.PunBasics
 			string defaultName = string.Empty;
 			InputField _inputField = this.GetComponent<InputField>();
 
-			// if (_inputField!=null)
-			// {
-			// 	if (PlayerPrefs.HasKey(playerNamePrefKey))
-			// 	{
-			// 		defaultName = PlayerPrefs.GetString(playerNamePrefKey);
-			// 		_inputField.text = defaultName;
-			// 	}
-			// }
+			if (_inputField!=null)
+			{
+				if (PlayerPrefs.HasKey(playerNamePrefKey))
+				{
+					defaultName = PlayerPrefs.GetString(playerNamePrefKey);
+					_inputField.text = defaultName;
+				}
+			}
 
 			PhotonNetwork.NickName =	defaultName;
 		}

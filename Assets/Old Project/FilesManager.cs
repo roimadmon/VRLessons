@@ -86,6 +86,8 @@ public class FilesManager : MonoBehaviour
                 }
             }
 
+            if (questions.Count < maxNumberQuestions)
+                maxNumberQuestions = questions.Count;
             _init = false;
             ManagerQuestions.instance.init();
         }

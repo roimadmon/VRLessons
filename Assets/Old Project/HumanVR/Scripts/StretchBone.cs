@@ -18,8 +18,17 @@ public class StretchBone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initDictance = 0;
+        Invoke("Init",1);
         initDictance = Vector3.Distance(partBodyStart.position, target.position);
-        
+        // Debug.Log("name: "+ gameObject.name+" distance :"+initDictance);
+       
+    }
+
+    void Init()
+    {
+        initDictance = Vector3.Distance(partBodyStart.position, target.position);
+        // Debug.Log("name: "+ gameObject.name+" distance :"+initDictance);
     }
 
     // Update is called once per frame
@@ -29,7 +38,8 @@ public class StretchBone : MonoBehaviour
         if (Vector3.Distance(partBodyStart.position, target.position) > initDictance)
         {
             stretch = Vector3.Distance(partBodyStart.position, target.position) - initDictance;
-            partBodyStresh.position += partBodyStresh.up * Mathf.Min(stretch,_maxStretch);
+            // partBodyStresh.position += partBodyStresh.up * Mathf.Min(stretch,_maxStretch);
+            partBodyStresh.position += -partBodyStresh.right * Mathf.Min(stretch,_maxStretch);
             
         }
         else

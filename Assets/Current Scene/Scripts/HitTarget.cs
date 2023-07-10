@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class HitTarget : MonoBehaviour
 {
-    [SerializeField] private Answer _answer;
     [SerializeField] private GameObject holeGameObject;
     [SerializeField] private int countHit = 20;
     public UnityEvent OnHit;
@@ -15,7 +14,7 @@ public class HitTarget : MonoBehaviour
     {
         countHit--;
         if(holeGameObject)
-                Instantiate(holeGameObject, hitPoint, quaternion.identity, transform);
+                Instantiate(holeGameObject, hitPoint, quaternion.identity, transform.parent);
             OnHit?.Invoke();
            
         if(countHit<=0)

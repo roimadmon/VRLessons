@@ -10,7 +10,7 @@ namespace Weelco {
 
         public int maxOutputChars = 30;
 
-        public Text inputFieldLabel;
+        public InputField inputFieldLabel;
         public TextMeshPro inputFieldLabelPro;
         public VRKeyboardFull keyboard;
         private bool initKey = true;

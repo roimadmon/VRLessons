@@ -10,8 +10,8 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
 
 namespace Photon.Pun.Demo.PunBasics
 {
@@ -32,7 +32,7 @@ namespace Photon.Pun.Demo.PunBasics
 		[Tooltip("The Ui Text to inform the user about the connection progress")]
 		[SerializeField]
 		private Text feedbackText;
-			
+
 		[Tooltip("The maximum number of players per room")]
 		[SerializeField]
 		private byte maxPlayersPerRoom = 4;
@@ -40,10 +40,6 @@ namespace Photon.Pun.Demo.PunBasics
 		[Tooltip("The UI Loader Anime")]
 		[SerializeField]
 		private LoaderAnime loaderAnime;
-		
-		[Tooltip("Load level")]
-		[SerializeField]
-		private string LoadLevel="";
 
 		#endregion
 
@@ -127,19 +123,13 @@ namespace Photon.Pun.Demo.PunBasics
 		/// Logs the feedback in the UI view for the player, as opposed to inside the Unity Editor for the developer.
 		/// </summary>
 		/// <param name="message">Message.</param>
-		///
-		///
-		public void LoadSceneByName(string name)
-		{
-			SceneManager.LoadScene(name);
-		}
 		void LogFeedback(string message)
 		{
 			// we do not assume there is a feedbackText defined.
 			if (feedbackText == null) {
 				return;
 			}
-			Debug.Log(message);
+
 			// add new messages as a new line and at the bottom of the log.
 			feedbackText.text += System.Environment.NewLine+message;
 		}
@@ -225,14 +215,8 @@ namespace Photon.Pun.Demo.PunBasics
 
 				// #Critical
 				// Load the Room Level. 
-				if(LoadLevel == "")
-					PhotonNetwork.LoadLevel("PunBasics-Room for 1");
-				else
-					PhotonNetwork.LoadLevel(LoadLevel);
-			}
-			else
-			{
-				PhotonNetwork.LoadLevel(LoadLevel);
+				PhotonNetwork.LoadLevel("PunBasics-Room for 1");
+
 			}
 		}
 

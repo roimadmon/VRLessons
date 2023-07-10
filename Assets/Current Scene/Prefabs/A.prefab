@@ -7,10 +7,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4841961010123604081, guid: 75939b18546acf54b9388e9808dafcbc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.609044
+      objectReference: {fileID: 0}
     - target: {fileID: 8145293000507707513, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}
       propertyPath: m_Name
-      value: A1
+      value: A
       objectReference: {fileID: 0}
     - target: {fileID: 8145293000507707518, guid: 75939b18546acf54b9388e9808dafcbc,
         type: 3}

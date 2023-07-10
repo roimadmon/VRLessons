@@ -8,6 +8,7 @@
 // <author>developer@exitgames.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using Photon.Pun.Demo.Cockpit;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,6 @@ namespace Photon.Pun.Demo.PunBasics
 
 		#region Private Fields
 
-		private GameObject instance;
 
         [Tooltip("The prefab to use for representing the player")]
         [SerializeField]
@@ -43,6 +43,9 @@ namespace Photon.Pun.Demo.PunBasics
         [SerializeField]
         private string lobyNameScene;
 
+        [SerializeField] private Vector3 _offset;
+        private Dictionary<int, GameObject> _players;
+        public bool isAdmin = false;
         #endregion
 
         #region MonoBehaviour CallBacks
@@ -53,20 +56,19 @@ namespace Photon.Pun.Demo.PunBasics
         void Start()
 		{
 			Instance = this;
-
+			// _offset = new Vector3(-0.5f, 1.5f, 0.5f);
 			// in case we started this demo with the wrong scene being active, simply load the menu scene
 			if (!PhotonNetwork.IsConnected)
 			{
 				SceneManager.LoadScene(lobyNameScene);
-				Debug.Log("in1");
 				return;
 			}
-
+			
+			_players = new Dictionary<int, GameObject>();
 			if (playerPrefab == null) { // #Tip Never assume public properties of Components are filled up properly, always check and inform the developer of it.
 			
 				Debug.LogError("<Color=Red><b>Missing</b></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
 			} else {
-				Debug.Log("in2");
 				Debug.Log(PlayerManager.LocalPlayerInstance);
 				if (PlayerManager.LocalPlayerInstance==null)
 				{
@@ -74,6 +76,12 @@ namespace Photon.Pun.Demo.PunBasics
 
 					// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
 					PhotonNetwork.Instantiate(this.playerPrefab.name, PlaceHolder.instance.Place[PhotonNetwork.CountOfPlayers-1].transform.position, Quaternion.identity,0);
+					
+					if (PhotonNetwork.IsMasterClient)
+					{
+						Debug.Log("in master");
+					}
+					
 				}else{
 
 					Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
@@ -96,6 +104,31 @@ namespace Photon.Pun.Demo.PunBasics
 			}
 		}
 
+
+		public void AddPlayers(int id, GameObject player)
+		{
+			_players.Add(id,player);
+			ReloadPlayers();
+		}
+
+		void ReloadPlayers()
+		{
+			foreach (var id in _players.Keys)
+			{
+				int index = id / 1000;
+				index -=1;
+				index %=2;
+				Debug.Log("place" +index );
+				_players[id].transform.parent = PlaceHolder.instance.Place[index ].transform;
+				// _players[id].transform.position = Vector3.zero; // + _offset;
+				if(isAdmin)
+					_players[id].transform.position = Vector3.zero + _offset;
+
+				// _players[id].transform.parent.rotation = Quaternion.identity;
+			}	
+		}
+		
+		
         #endregion
 
         #region Photon Callbacks
@@ -106,14 +139,16 @@ namespace Photon.Pun.Demo.PunBasics
         /// <param name="other">Other.</param>
         public override void OnPlayerEnteredRoom( Player other  )
 		{
-			Debug.Log( "OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
-
+			Debug.Log( "OnPlayerEnteredRoom() " + other.NickName+ PhotonNetwork.IsMasterClient ); // not seen if you're the player connecting
+			
 			if ( PhotonNetwork.IsMasterClient )
 			{
 				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
-
+				isAdmin = PhotonNetwork.IsMasterClient;
 				// LoadArena();
 			}
+
+
 		}
 
 		/// <summary>
@@ -122,13 +157,13 @@ namespace Photon.Pun.Demo.PunBasics
 		/// <param name="other">Other.</param>
 		public override void OnPlayerLeftRoom( Player other  )
 		{
-			Debug.Log( "OnPlayerLeftRoom() " + other.NickName ); // seen when other disconnects
+			Debug.Log( "OnPlayerLeftRoom() " + other.NickName+" "+ PhotonNetwork.IsMasterClient ); // seen when other disconnects
 
 			if ( PhotonNetwork.IsMasterClient )
 			{
 				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
-
-				LoadArena(); 
+				SceneManager.LoadScene(lobyNameScene);
+				// LoadArena(); 
 			}
 		}
 

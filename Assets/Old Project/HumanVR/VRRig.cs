@@ -14,6 +14,7 @@ public class VRMap
     {
         rigTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
         rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        // rigTarget.rotation = Quaternion.Euler(trackingRotationOffset);
     }
 }
 
@@ -29,7 +30,7 @@ public class VRRig : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        headBodyOffset = transform.position - headConstaint.position;
+        // headBodyOffset = transform.position - headConstaint.position;
     }
 
     // Update is called once per frame

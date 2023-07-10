@@ -49,10 +49,10 @@ namespace Autohand.Demo{
 
         public void ReturnBack()
         {
-            // transform.parent = parent;
-            // transform.localPosition = Vector3.zero;
-            // GetComponent<Rigidbody>().isKinematic =true;
-            // transform.localRotation = Quaternion.identity;
+            transform.parent = parent;
+            transform.localPosition = Vector3.zero;
+            GetComponent<Rigidbody>().isKinematic =true;
+            transform.localRotation = Quaternion.identity;
             
 
         }

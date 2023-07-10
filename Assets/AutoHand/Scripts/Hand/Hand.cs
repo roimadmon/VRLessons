@@ -143,7 +143,7 @@ namespace Autohand {
             }
         }
 
-
+        private int _release = 2;
         
 
         protected override void Awake() {
@@ -251,43 +251,85 @@ namespace Autohand {
 
 
         /// <summary>Function for controller trigger fully pressed -> Grabs whatever is directly in front of and closest to the hands palm (by default this is called by the hand controller link component)</summary>
-        public virtual void Grab() {
-            Grab(grabType);
+        public virtual void Grab()
+        {
+            if (_release > 0)
+            {
+                Grab(grabType);
+                _release--;
+            }
+            else
+            {
+                Release();
+            }
+           
+
         }
 
         /// <summary>Function for controller trigger fully pressed -> Grabs whatever is directly in front of and closest to the hands palm</summary>
-        public virtual void Grab(GrabType grabType) {
-            OnTriggerGrab?.Invoke(this, null);
-            foreach(var triggerArea in triggerEventAreas) {
-                triggerArea.Grab(this);
-            }
-            if(usingHighlight && !grabbing && holdingObj == null && lookingAtObj != null) {
-                var newGrabType = this.grabType;
-                if(lookingAtObj.grabType != HandGrabType.Default)
-                    newGrabType = lookingAtObj.grabType == HandGrabType.GrabbableToHand ? GrabType.GrabbableToHand : GrabType.HandToGrabbable;
+        public virtual void Grab(GrabType grabType)
+        {
+            if (_release > 0) 
+            {
+                OnTriggerGrab?.Invoke(this, null);
+                foreach (var triggerArea in triggerEventAreas)
+                {
+                    triggerArea.Grab(this);
+                }
 
-                grabRoutine = StartCoroutine(GrabObject(GetHighlightHit(), lookingAtObj, newGrabType));
-            }
-
-            else if(!grabbing && holdingObj == null) {
-                if(HandClosestHit(out RaycastHit closestHit, out Grabbable grabbable, reachDistance, ~handLayers) != Vector3.zero && grabbable != null) {
+                if (usingHighlight && !grabbing && holdingObj == null && lookingAtObj != null)
+                {
                     var newGrabType = this.grabType;
-                    if(grabbable.grabType != HandGrabType.Default)
-                        newGrabType = grabbable.grabType == HandGrabType.GrabbableToHand ? GrabType.GrabbableToHand : GrabType.HandToGrabbable;
-                    if(grabbable != null)
-                        grabRoutine = StartCoroutine(GrabObject(closestHit, grabbable, newGrabType));
+                    if (lookingAtObj.grabType != HandGrabType.Default)
+                        newGrabType = lookingAtObj.grabType == HandGrabType.GrabbableToHand
+                            ? GrabType.GrabbableToHand
+                            : GrabType.HandToGrabbable;
+
+                    grabRoutine = StartCoroutine(GrabObject(GetHighlightHit(), lookingAtObj, newGrabType));
+                }
+
+                else if (!grabbing && holdingObj == null)
+                {
+                    if (HandClosestHit(out RaycastHit closestHit, out Grabbable grabbable, reachDistance,
+                            ~handLayers) != Vector3.zero && grabbable != null)
+                    {
+                        var newGrabType = this.grabType;
+                        if (grabbable.grabType != HandGrabType.Default)
+                            newGrabType = grabbable.grabType == HandGrabType.GrabbableToHand
+                                ? GrabType.GrabbableToHand
+                                : GrabType.HandToGrabbable;
+                        if (grabbable != null)
+                            grabRoutine = StartCoroutine(GrabObject(closestHit, grabbable, newGrabType));
+                    }
+                }
+                else if (holdingObj != null && holdingObj.CanGetComponent(out GrabLock grabLock))
+                {
+                    grabLock.OnGrabPressed?.Invoke(this, holdingObj);
                 }
             }
-            else if(holdingObj != null && holdingObj.CanGetComponent(out GrabLock grabLock)) {
-                grabLock.OnGrabPressed?.Invoke(this, holdingObj);
+            else
+            {
+                Release();
             }
+
+           
         }
 
         /// <summary>Grabs based on raycast and grab input data</summary>
-        public virtual void Grab(RaycastHit hit, Grabbable grab, GrabType grabType = GrabType.InstantGrab) {
-            bool objectFree = grab.body.isKinematic != true && grab.body.constraints == RigidbodyConstraints.None;
-            if(!grabbing && holdingObj == null && this.CanGrab(grab) && objectFree) {
-                grabRoutine = StartCoroutine(GrabObject(hit, grab, grabType));
+        public virtual void Grab(RaycastHit hit, Grabbable grab, GrabType grabType = GrabType.InstantGrab)
+        {
+            if (_release > 0) 
+            {
+                Debug.Log("in grab");
+                bool objectFree = grab.body.isKinematic != true && grab.body.constraints == RigidbodyConstraints.None;
+                if (!grabbing && holdingObj == null && this.CanGrab(grab) && objectFree)
+                {
+                    grabRoutine = StartCoroutine(GrabObject(hit, grab, grabType));
+                }
+            }
+            else
+            {
+                Release();
             }
         }
 
@@ -336,24 +378,30 @@ namespace Autohand {
 
         /// <summary>Function for controller trigger unpressed (by default this is called by the hand controller link component)</summary>
         public virtual void Release() {
-            OnTriggerRelease?.Invoke(this, null);
-            foreach(var triggerArea in triggerEventAreas) {
-                triggerArea.Release(this);
+            if (_release<=0)
+            {
+                _release = 2;
+                OnTriggerRelease?.Invoke(this, null);
+                foreach (var triggerArea in triggerEventAreas)
+                {
+                    triggerArea.Release(this);
+                }
+
+                if (holdingObj && !holdingObj.wasForceReleased && holdingObj.CanGetComponent<GrabLock>(out _))
+                    return;
+
+                if (holdingObj != null)
+                {
+                    OnBeforeReleased?.Invoke(this, holdingObj);
+                    //Do the holding object calls and sets
+                    holdingObj?.OnRelease(this);
+                    OnHeldConnectionBreak?.Invoke(this, holdingObj);
+                    OnReleased?.Invoke(this, holdingObj);
+                    ignoreMoveFrame = true;
+                }
+
+                BreakGrabConnection();
             }
-
-            if(holdingObj && !holdingObj.wasForceReleased && holdingObj.CanGetComponent<GrabLock>(out _))
-                return;
-
-            if(holdingObj != null) {
-                OnBeforeReleased?.Invoke(this, holdingObj);
-                //Do the holding object calls and sets
-                holdingObj?.OnRelease(this);
-                OnHeldConnectionBreak?.Invoke(this, holdingObj);
-                OnReleased?.Invoke(this, holdingObj);
-                ignoreMoveFrame = true;
-            }
-
-            BreakGrabConnection();
         }
 
         /// <summary>This will force release the hand without throwing or calling OnRelease\n like losing grip on something instead of throwing</summary>

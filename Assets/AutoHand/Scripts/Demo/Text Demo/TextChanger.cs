@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Autohand;
+using UnityEngine.UI;
 
 namespace Autohand.Demo{
     public class TextChanger : MonoBehaviour{
         public TMPro.TextMeshPro textMeshPro;
+        [SerializeField] private Text _text;
         Coroutine changing;
         Coroutine hide;
         
@@ -13,27 +15,48 @@ namespace Autohand.Demo{
 
         }
 
+        public void LTR(string s)
+        {
+            // _text.text += s[0];
+            // if(s.Length <= 1)
+                // return;
+            // _text.text = _text.text.Replace(_text.text, s[s.Length - 1] + _text.text);
+            _text.text = "";
+            Debug.Log(s.Length+" :" +s);
+            for (int i =  s.Length-1 ; i >= 0; i--)
+            {
+                _text.text += s[i];
+            }
+        }
+        
+        
+        
         public void UpdateText(string newText)
         {
             Debug.Log(newText);
-            textMeshPro.text = newText;
+            if(textMeshPro)
+                textMeshPro.text = newText;
         }
 
         public void UpdateTextString(string newText)
         {
             Debug.Log(newText);
-            textMeshPro.text = newText+"";
+            if (textMeshPro)
+                textMeshPro.text = newText + "";
         }
+
         public void UpdateTextint(float newText)
         {
             // Debug.Log(newText);
-            textMeshPro.text = ((int)newText+1)+"";
+            if(textMeshPro)
+                textMeshPro.text = ((int)newText+1)+"";
         }
         
         public void UpdateTextScore(float newText)
         {
             // Debug.Log(newText);
-            textMeshPro.text = ((int)newText)+"";
+            if(textMeshPro)
+                textMeshPro.text = ((int)newText)+"";
         }
         IEnumerator ChangeText(float seconds, string newText) {
             //float totalTime = 1f;
